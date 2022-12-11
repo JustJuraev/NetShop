@@ -1,0 +1,16 @@
+﻿@model Product
+@{
+    ViewData["Title"] = $"{Model.Name}";
+}
+
+<link rel="stylesheet" href="~/css/main.css" />
+
+<div class="maindiv">
+   <img class="rasm" src="@Model.Image">
+   <div class="kik">
+       <h2 class="ism">@Model.Name</h2>
+       <h3 class="narx">Цена: @Model.Price Сум</h3>
+       <h2 class="opisanie">Описание товара</h2>
+       <h5 class="lopisanie">@Model.LongDesc</h5>
+   </div>
+</div>

@@ -34,6 +34,11 @@ namespace NetShop.Controllers
 			return View(_productService.GetByCategory(id));
 		}
 
+		public IActionResult GetProduct(int id)
+		{
+			return View(_productService.GetProduct(id));
+		}
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{
