@@ -14,6 +14,7 @@ namespace NetShop.Models
 
 		public DbSet<Category> Categories { get; set; }
 
+		public DbSet<Property> Properties { get; set; }
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
