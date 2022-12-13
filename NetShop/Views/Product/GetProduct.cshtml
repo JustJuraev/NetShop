@@ -10,7 +10,14 @@
    <div class="kik">
        <h2 class="ism">@Model.Name</h2>
        <h3 class="narx">Цена: @Model.Price Сум</h3>
-       <h2 class="opisanie">Описание товара</h2>
-       <h5 class="lopisanie">@Model.LongDesc</h5>
+       <h2 class="opisanie">Характеристики</h2>
+       <div class="xarak">
+            @foreach (var item in ViewBag.List)
+            {
+                <p>@item.Property.Value ----- @item.Value</p>
+            }
+       </div>
    </div>
 </div>
+<h1 class="nameopis">Описание товара</h1>
+<h3 class="lopisanie">@Model.LongDesc</h3>

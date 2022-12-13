@@ -20,5 +20,14 @@ namespace NetShop.Repository.Repository
 			return _context.Products.ToList();
 		}
 
-	}
+        public List<Product> GetByCategory(int categoryId)
+        {
+           return _context.Products.Where(x => x.CategoryId == categoryId).ToList();
+        }
+
+        public Product GetProduct(int id)
+        {
+            return _context.Products.FirstOrDefault(x => x.Id == id);
+        }
+    }
 }
