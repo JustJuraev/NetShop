@@ -21,3 +21,7 @@
 </div>
 <h1 class="nameopis">Описание товара</h1>
 <h3 class="lopisanie">@Model.LongDesc</h3>
+
+<form class="dkorzina" asp-controller="Basket" asp-action="AddProduct" asp-route-id="@Model.Id" method="post">
+    <button class="btn btn-primary">Добавить в корзину</button>
+</form>

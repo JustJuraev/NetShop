@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Product>
+@{
+}
+<link rel="stylesheet" href="~/css/main.css" />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Название</th>
+            <th scope="col">Цена</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr scope="row">
+                <td><img class="catimg" src="@item.Image"></td>
+                <td>@item.Name</td>
+                <td>@item.Price Сум</td>
+            </tr>
+        }   
+    </tbody>
+</table>

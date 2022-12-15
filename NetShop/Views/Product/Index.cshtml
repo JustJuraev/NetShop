@@ -4,6 +4,16 @@
 }
 <link rel="stylesheet" href="~/css/main.css" />
 
+<div class="catdiv">
+    @foreach(var item in ViewBag.Categories)
+    {
+        <div class="catblock">
+        <img class="catimg" src="@item.Image">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="GetByCategory" asp-route-id="@item.Id">@item.Name</a>
+        </div>
+    }
+</div>
+
 <div class="bigdiv">
 @foreach(var item in Model)
 {
@@ -14,10 +24,13 @@
         <h4 class="card-title">@item.Name</h4>
         <h5 class="card-title">Цена: @item.Price Сум</h5>
         <p class="card-text">@item.ShortDesc</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a asp-action="GetProduct" asp-controller="Product" asp-route-id="@item.Id" class="btn btn-primary">Купить</a>
       </div>
     </div>
     </div>
    @* <h5>@item.CategoryId</h5>*@
 }
 </div>
+
+@*
+<h3>@ViewBag.Session</h3>*@
