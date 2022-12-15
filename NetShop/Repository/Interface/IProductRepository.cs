@@ -8,5 +8,7 @@ namespace NetShop.Repository.Interface
 		Product GetProduct(int id);
 
 		List<Product> GetByCategory(int categoryId);
-	}
+		List<Product> Sort(string sort);
+
+    }
 }

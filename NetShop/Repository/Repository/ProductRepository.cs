@@ -29,5 +29,30 @@ namespace NetShop.Repository.Repository
         {
             return _context.Products.FirstOrDefault(x => x.Id == id);
         }
+
+		public List<Product> Sort(string sort)
+		{
+			var list = _context.Products.ToList();
+			switch(sort) 
+			{
+				case "price":
+					list = _context.Products.OrderByDescending(x => x.Price).ToList();
+					break;
+                case "-price":
+                    list = _context.Products.OrderBy(x => x.Price).ToList();
+                    break;
+                case "begin":
+                    list = _context.Products.OrderBy(x => x.Name).ToList();
+                    break;
+                case "finish":
+                    list = _context.Products.OrderByDescending(x => x.Name).ToList();
+                    break;
+                default:
+					list = _context.Products.ToList();
+					break;
+			}
+
+			return list;
+		}
     }
 }

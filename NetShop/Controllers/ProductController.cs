@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using NetShop.Models;
 using NetShop.Service.Interfaces;
@@ -13,15 +15,21 @@ namespace NetShop.Controllers
 	public class ProductController : Controller
 	{
 		private IProductService _productService;
-
-		public ProductController(IProductService productService)
+		private IProductPropertyService _productPropertyService;
+		private ICategoryService _categoryService;
+		public ProductController(IProductService productService, IProductPropertyService productPropertyService,
+			ICategoryService categoryService)
 		{
 			_productService = productService;
+			_productPropertyService = productPropertyService;
+			_categoryService = categoryService;
 		}
 
-		public IActionResult Index()
+		public IActionResult Index(string sort)
 		{
-			return View(_productService.GetAll());
+			var list = _productService.Sort(sort);
+			ViewBag.Categories = _categoryService.GetAll();
+			return View(list);
 		}
 
 		public IActionResult Privacy()
@@ -36,6 +44,7 @@ namespace NetShop.Controllers
 
 		public IActionResult GetProduct(int id)
 		{
+			ViewBag.List = _productPropertyService.ReturnCharac(id);
 			return View(_productService.GetProduct(id));
 		}
 

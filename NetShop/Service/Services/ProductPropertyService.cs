@@ -2,6 +2,7 @@
 using NetShop.Repository.Interface;
 using NetShop.Service.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NetShop.Service.Services
 {
@@ -17,6 +18,11 @@ namespace NetShop.Service.Services
         public List<ProductProperty> GetAll()
         {
             return _productProperty.GetAll();
+        }
+
+        public List<ProductProperty> ReturnCharac(int id)
+        {
+            return _productProperty.ReturnCharac(id);
         }
     }
 }
