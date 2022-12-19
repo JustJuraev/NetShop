@@ -15,6 +15,11 @@ namespace NetShop.Service.Services
             _productProperty = productProperty;
         }
 
+        public List<Filters> Filter(int id)
+        {
+           return _productProperty.Filter(id);
+        }
+
         public List<ProductProperty> GetAll()
         {
             return _productProperty.GetAll();

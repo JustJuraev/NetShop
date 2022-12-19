@@ -9,5 +9,7 @@ namespace NetShop.Service.Interfaces
         List<ProductProperty> GetAll();
 
         List<ProductProperty> ReturnCharac(int id);
+
+        List<Filters> Filter(int id);
     }
 }

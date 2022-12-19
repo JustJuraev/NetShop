@@ -37,9 +37,18 @@ namespace NetShop.Controllers
 			return View();
 		}
 
-		public IActionResult GetByCategory(int id)
+		public IActionResult GetByCategory(int id, int pricemin, int pricemax, List<Filters> filters)
 		{
-			return View(_productService.GetByCategory(id));
+			ProductFilterModel productFilter = new ProductFilterModel();
+			productFilter.Products = _productService.GetByCategory(id);
+			productFilter.Filters = _productPropertyService.Filter(id);
+			ViewBag.Pricemin = pricemin;
+
+
+           
+            productFilter.Products = _productService.Filter(id, pricemin, pricemax, filters);
+           
+            return View(productFilter);
 		}
 
 		public IActionResult GetProduct(int id)

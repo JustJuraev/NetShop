@@ -1,4 +1,5 @@
-﻿using NetShop.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using NetShop.Models;
 using NetShop.Repository.Interface;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,6 @@ namespace NetShop.Repository.Repository
 		   _context = context;
 		}
 
-
 		public List<Product> GetAll()
 		{
 			return _context.Products.ToList();
@@ -29,6 +29,43 @@ namespace NetShop.Repository.Repository
         {
             return _context.Products.FirstOrDefault(x => x.Id == id);
         }
+
+       
+		public List<Product> Filter(int id, int pricemin, int pricemax, List<Filters> filters)
+		{
+			var list = _context.Products.Include(x => x.Properties).Where(p => p.CategoryId == id);
+            List<string> filter = new List<string>();
+
+          
+            foreach (var item in filters)
+            {
+                var filter2 = item.FilterModels.Where(x => x.IsSelected).ToList();
+                if (filter2.Count > 0)
+                {
+                    filter.AddRange(filter2.Select(x => x.Value));
+                    list = list.Where(x => x.Properties.Any(x => filter.Contains(x.Value)));
+                }
+            }
+
+            if (pricemin != 0 && pricemax != 0)
+            {
+                list = list.Where(x => x.Price > pricemin && x.Price < pricemax);
+            }
+            else if (pricemin != 0 && pricemax == 0)
+            {
+                list = list.Where(x => x.Price > pricemin);
+            }
+            else if (pricemin == 0 && pricemax != 0)
+            {
+                list = list.Where(x => x.Price < pricemax);
+            }
+            else if (pricemin == 0 && pricemax == 0)
+            {
+                return list.ToList();
+            }
+
+            return list.ToList();
+		}
 
 		public List<Product> Sort(string sort)
 		{

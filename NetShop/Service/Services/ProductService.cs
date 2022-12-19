@@ -14,9 +14,30 @@ namespace NetShop.Service.Services
 		   _productRepository = productRepository;
 		}
 
-		public List<Product> GetAll()
+        public List<Product> Filter(int id, int pricemin, int pricemax, List<Filters> filters)
+        {
+           return _productRepository.Filter(id,pricemin, pricemax, filters);
+        }
+
+        public List<Product> GetAll()
 		{
 			return _productRepository.GetAll();
 		}
-	}
+
+        public List<Product> GetByCategory(int categoryId)
+        {
+            return _productRepository.GetByCategory(categoryId);
+        }
+
+        public Product GetProduct(int id)
+        {
+            return _productRepository.GetProduct(id);
+        }
+
+        public List<Product> Sort(string sort)
+		{
+			return _productRepository.Sort(sort);
+		}
+
+    }
 }
