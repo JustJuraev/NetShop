@@ -22,14 +22,46 @@ namespace NetShop.Controllers
             return TempData["Session"].ToString();
         }
 
+        //private int TotalSum(string sessionId)
+        //{
+        //    int sum = 0;    
+        //    foreach(var item in BasketList.GetBasket(sessionId))
+        //    {
+        //        sum += item.Price;
+        //    }
+
+        //    return sum;
+        //}
+
+        [HttpPost]
+        public IActionResult Clear()
+        {
+            BasketList.Clear(GetSessionId());
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        public IActionResult RemoveProduct(int id)
+        {
+
+            BasketProduct basketProduct = new BasketProduct();
+            basketProduct.Product = _productService.GetProduct(id);
+            BasketList.Remove(GetSessionId(), basketProduct);
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public IActionResult AddProduct(int id)
         {
-            BasketList.Add(GetSessionId(), _productService.GetAll().FirstOrDefault(x => x.Id == id));
+            BasketProduct basketProduct = new BasketProduct();
+            basketProduct.Product = _productService.GetProduct(id);
+            BasketList.Add(GetSessionId(), basketProduct);
             return RedirectToAction("Index");
         }
         public IActionResult Index()
         {
+            ViewBag.Sum = BasketList.TotalSum(GetSessionId());
             return View(BasketList.GetBasket(GetSessionId()));
         }
     }
