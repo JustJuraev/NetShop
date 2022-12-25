@@ -14,6 +14,15 @@ namespace NetShop.Repository.Repository
             _context = context;
         }
 
+        public void Add(User user)
+        {
+            if (!_context.Users.Contains(user))
+            {
+                _context.Users.Add(user);
+                _context.SaveChanges();
+            }
+        }
+
         public List<User> GetAll()
         {
             return _context.Users.ToList();

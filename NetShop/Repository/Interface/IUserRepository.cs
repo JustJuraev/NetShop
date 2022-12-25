@@ -4,5 +4,6 @@ namespace NetShop.Repository.Interface
 {
     public interface IUserRepository : IBaseRepository<User>
     {
+        void Add(User user);
     }
 }
