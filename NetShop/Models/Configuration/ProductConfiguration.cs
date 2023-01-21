@@ -14,6 +14,10 @@ namespace NetShop.Models.Configuration
 			builder.Property(b => b.ShortDesc).IsRequired();
 			builder.Property(b => b.LongDesc).IsRequired();
 			builder.Property(b => b.Image).IsRequired();
-		}
+			builder.Property(b => b.CategoryId);
+			builder.Property(b => b.Count);
+			builder.HasOne(b => b.Category)
+			  .WithMany(b => b.Products); 
+        }
 	}
 }

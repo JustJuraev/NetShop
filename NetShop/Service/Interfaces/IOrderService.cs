@@ -8,5 +8,9 @@ namespace NetShop.Service.Interfaces
         List<Order> GetAll();
 
         void Create(Order order);
+
+        int TotalSum(Order order);
+
+        List<string> AddToOrderBasket(Order order);
     }
 }

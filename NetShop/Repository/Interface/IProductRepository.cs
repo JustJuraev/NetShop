@@ -12,7 +12,8 @@ namespace NetShop.Repository.Interface
 
 		List<Product> Filter(int id, int pricemin, int pricemax, List<Filters> filters);
 
+		List<Product> Search(string search);
 
-        
+		
     }
 }

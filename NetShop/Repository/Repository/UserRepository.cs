@@ -14,6 +14,11 @@ namespace NetShop.Repository.Repository
             _context = context;
         }
 
+        public User ReturnByName(string name) 
+        { 
+            return _context.Users.FirstOrDefault(x => x.Name == name);
+        }
+
         public void Add(User user)
         {
             if (!_context.Users.Contains(user))

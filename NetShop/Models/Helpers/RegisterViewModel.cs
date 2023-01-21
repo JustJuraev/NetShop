@@ -18,5 +18,7 @@ namespace NetShop.Models.Helpers
         [Required(ErrorMessage = "Подвердите пароль")]
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string PasswordConfirm { get; set; }
+
+        public int RegionId { get; set; }   
     }
 }

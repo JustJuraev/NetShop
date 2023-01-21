@@ -12,6 +12,7 @@ namespace NetShop.Models.Configuration
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Password).IsRequired();
             builder.Property(x => x.Role).IsRequired();
+            builder.Property(x => x.RegionId);
         }
     }
 }

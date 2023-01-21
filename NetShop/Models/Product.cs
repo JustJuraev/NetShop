@@ -1,5 +1,6 @@
 ﻿using NetShop.Service.Services;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetShop.Models
 {
@@ -21,7 +22,11 @@ namespace NetShop.Models
 
         public Category Category { get; set; }
 
+		public int Count { get; set; }
 
 		public List<ProductProperty> Properties { get; set; }
+
+		
+		public List<ProductAddress> Address { get; set; }
 	}
 }

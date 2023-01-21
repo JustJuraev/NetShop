@@ -15,9 +15,12 @@ namespace NetShop.Repository.Repository
 		   _context = context;
 		}
 
+      
 		public List<Product> GetAll()
 		{
-			return _context.Products.ToList();
+            var list = _context.Products.OrderBy(x => x.Id).ToList();
+           
+			return list;
 		}
 
         public List<Product> GetByCategory(int categoryId)
@@ -27,6 +30,7 @@ namespace NetShop.Repository.Repository
 
         public Product GetProduct(int id)
         {
+            
             return _context.Products.FirstOrDefault(x => x.Id == id);
         }
 
@@ -67,6 +71,16 @@ namespace NetShop.Repository.Repository
             return list.ToList();
 		}
 
+        public List<Product> Search(string search)
+        {
+            var list = GetAll();
+            if (search != null)
+            {
+                list = list.Where(x => x.Name.ToLower().Contains(search.ToLower())).ToList();
+            }
+            return list;
+        }
+
 		public List<Product> Sort(string sort)
 		{
 			var list = _context.Products.ToList();
@@ -91,5 +105,7 @@ namespace NetShop.Repository.Repository
 
 			return list;
 		}
+
+       
     }
 }

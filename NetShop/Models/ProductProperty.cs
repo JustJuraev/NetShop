@@ -8,12 +8,12 @@ namespace NetShop.Models
 
         public int ProductId { get; set; }
 
-        [NotMapped]
+     
         public Product Product { get; set; }
 
         public int PropertyId { get; set; }
 
-        [NotMapped]
+       
         public Property Property { get; set; }
 
         public string Value { get; set; }

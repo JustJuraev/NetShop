@@ -3,32 +3,51 @@
     ViewData["Title"] = "Главная страница";
 }
 <link rel="stylesheet" href="~/css/main.css" />
+<form>
+    <div class="poisk">
+    <input name="search" placeholder="Поиск" class="form-control">
+    <button type="submit" class="hidden">submit</button>
+    </div>
+</form>
+
+<div class="sort">
+    <p class="sorttext">Сортировать по: </p>
+    <a class="sortd" asp-controller="Product" asp-action="Index" asp-route-sort="price">Дороже</a>
+    <a class="sortd" asp-controller="Product" asp-action="Index" asp-route-sort="-price">Дешевле</a>
+    <a class="sortd" asp-controller="Product" asp-action="Index" asp-route-sort="begin">С начала алфавита</a>
+    <a class="sortd" asp-controller="Product" asp-action="Index" asp-route-sort="finish">С конца алфавита</a>
+</div>
 
 <div class="catdiv">
     @foreach(var item in ViewBag.Categories)
     {
         <div class="catblock">
-        <img class="catimg" src="@item.Image">
+            <img class="catimg" src="https://localhost:5001/categories/images/@item.Image">
         <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="GetByCategory" asp-route-id="@item.Id">@item.Name</a>
         </div>
     }
 </div>
 
+
+
 <div class="bigdiv">
 @foreach(var item in Model)
 {
-    <div class="smalldiv">
-    <div class="card" style="width: 20rem;">
-      <img class="card-img-top" src="@item.Image" alt="Тут должна была быит картина" width="300" height="300">
-      <div class="card-body">
-        <h4 class="card-title">@item.Name</h4>
-        <h5 class="card-title">Цена: @item.Price Сум</h5>
-        <p class="card-text">@item.ShortDesc</p>
-        <a asp-action="GetProduct" asp-controller="Product" asp-route-id="@item.Id" class="btn btn-primary">Купить</a>
-      </div>
-    </div>
-    </div>
-   @* <h5>@item.CategoryId</h5>*@
+        @if (item.Count > 0)
+        {
+            <div class="smalldiv">
+                <div class="card" style="width: 20rem;">
+                    <img class="card-img-top" src="https://localhost:5001/products/images/@item.Image" alt="Тут должна была быит картина" width="300" height="300">
+                    <div class="card-body">
+                        <h4 class="card-title">@item.Name</h4>
+                        <h5 class="card-title">Цена: @item.Price Сум</h5>
+                        <p class="card-text">@item.ShortDesc</p>
+                        <a asp-action="GetProduct" asp-controller="Product" asp-route-id="@item.Id" class="btn btn-primary">Купить</a>
+                    </div>
+                </div>
+            </div>
+        }
+        @* <h5>@item.CategoryId</h5>*@
 }
 </div>
 

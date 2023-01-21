@@ -1,22 +1,60 @@
-﻿@model IEnumerable<Product>
+﻿@model ProductFilterModel
 @{
     ViewData["Title"] = "Главная страница";
+    var filters = Model.Filters;
+   
 }
 <link rel="stylesheet" href="~/css/main.css" />
 
-<div class="bigdiv">
-    @foreach (var item in Model)
+<div class="maindiv">
+    <div class="filerdiv">
+        <form>
+            <h6 class="val">От</h6>
+            <input class="val" type="text" name="pricemin">
+            <h6 class="val">До</h6>
+            <input class="val" type="text" name="pricemax">
+            @for (int i = 0; i < filters.Count; i++)
+            {
+                <h3 class="val">@filters[i].PropertyName</h3>
+                
+                for (int j = 0; j < filters[i].FilterModels.Count; j++)
+                {
+                    
+                    <div class="form-check m-1">
+                        <input type="hidden" asp-for="@filters[i].FilterModels[j].PropertyId" />
+                        <input type="hidden" asp-for="@filters[i].FilterModels[j].Value" />
+                        
+                        <input asp-for="@filters[i].FilterModels[j].IsSelected" class="form-check-label" />
+                        <label class="form-check-label" asp-for="@filters[i].FilterModels[j].IsSelected">
+                            @filters[i].FilterModels[j].Value
+                        </label>
+                    </div>
+                   
+                }
+            }
+            <div class="knopka">
+                <button class="btn btn-primary">Фильтровать</button>
+            </div>
+        </form>
+     
+    </div>
+<div class="bigdi">
+    @foreach (var item in Model.Products)
     {
+        @if(item.Count > 0)
+        {
         <div class="smalldiv">
         <div class="card" style="width: 20rem;">
-          <img class="card-img-top" src="@item.Image" alt="Тут должна была быит картина" width="300" height="300">
+                    <img class="card-img-top" src="https://localhost:5001/products/images/@item.Image" alt="Тут должна была быть картина" width="300" height="300">
           <div class="card-body">
             <h4 class="card-title">@item.Name</h4>
             <h5 class="card-title">Цена: @item.Price Сум</h5>
             <p class="card-text">@item.ShortDesc</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <a asp-action="GetProduct" asp-controller="Product" asp-route-id="@item.Id" class="btn btn-primary">Купить</a>
           </div>
         </div>
         </div>
+        }
     }
+</div>
 </div>

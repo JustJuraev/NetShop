@@ -34,6 +34,11 @@ namespace NetShop.Service.Services
             return _productRepository.GetProduct(id);
         }
 
+        public List<Product> Search(string search)
+        {
+            return _productRepository.Search(search);
+        }
+
         public List<Product> Sort(string sort)
 		{
 			return _productRepository.Sort(sort);

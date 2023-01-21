@@ -1,0 +1,125 @@
+﻿.poisk
+{
+    margin-bottom: 15px;
+}
+.hidden {
+    display: none;
+}
+.field-validation-error {
+    color: red;
+    font-size: smaller;
+}
+.inputd
+{
+    width: 150px;
+}
+.oshibka {
+    color: orangered;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+.ofof {
+    margin-left: 2px;
+}
+.knopki {
+    display: flex;
+}
+.basketclear
+{
+    margin-left: 25px;
+}
+.knopka {
+    margin-left: 25px;
+}
+.val {
+    margin-left: 25px;
+}
+.maindiv {
+    display: flex;
+}
+.filerdiv
+{
+    margin-top: 35px;
+    width: 370px;
+}
+.sort {
+    display: flex;
+}
+.sortd
+{
+    color: black;
+    text-decoration: none;
+    margin-left: 10px;
+}
+.dkorzina {
+    margin-top: 35px;
+}
+.smalldiv {
+    margin-top: 40px;
+    margin-left: 25px;
+}
+.bigdi {
+    margin-left: 5px;
+    display: flex;
+    width: 1500px;
+    flex-wrap: wrap;
+}
+.bigdiv
+{
+    margin-left: 25px;
+    display: flex;
+    width: 1500px;
+    flex-wrap: wrap;
+}
+.maindiv
+{
+    display: flex;
+}
+.kik
+{
+    margin-top: 100px;
+    margin-left: 35px;
+}
+.rasm
+{
+    margin-top: 10px;
+    width: 600px;
+    height: 600px;
+}
+.xarak
+{
+    margin-top: 25px;
+    font-size: 20px;
+}
+.narx
+{
+    margin-top: 45px;
+}
+.lopisanie
+{
+    margin-top: 25px;
+}
+.opisanie
+{
+    margin-top: 20px;
+}
+.nameopis
+{
+    text-align: center;
+    margin-top: 15px;
+}
+.catimg
+{
+    width: 100px;
+    height: 100px;
+}
+.catdiv
+{
+    display: flex;
+    margin-left: 30px;
+}
+.catblock
+{
+    margin-top: 15px;
+    margin-left: 25px;
+}

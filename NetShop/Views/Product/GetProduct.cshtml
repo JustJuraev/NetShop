@@ -1,12 +1,14 @@
 ﻿@model Product
 @{
+
     ViewData["Title"] = $"{Model.Name}";
+    var regions = ViewBag.Regions;
 }
 
 <link rel="stylesheet" href="~/css/main.css" />
 
 <div class="maindiv">
-   <img class="rasm" src="@Model.Image">
+    <img class="rasm" src="https://localhost:5001/products/images/@Model.Image">
    <div class="kik">
        <h2 class="ism">@Model.Name</h2>
        <h3 class="narx">Цена: @Model.Price Сум</h3>
@@ -14,14 +16,42 @@
        <div class="xarak">
             @foreach (var item in ViewBag.List)
             {
-                <p>@item.Property.Value ----- @item.Value</p>
+                <p>@item.Property.Value --------- @item.Value</p>
             }
        </div>
-   </div>
+       
+        @if(Model.Count <= 0)
+        {
+            <h5>Нет в наличии</h5>
+        }
+        @if (User.Identity.IsAuthenticated)
+        {
+            @if (!regions.Contains(ViewBag.UserRegion))
+            {
+                <h2>Товар не доступен в вашем регионе </h2>
+            }
+        }
+    </div>
 </div>
 <h1 class="nameopis">Описание товара</h1>
 <h3 class="lopisanie">@Model.LongDesc</h3>
+@if (Model.Count > 0)
+{
+    @if (!User.Identity.IsAuthenticated)
+    {
+        
+        <form class="dkorzina" asp-controller="Order" asp-action="AddProduct" asp-route-id="@Model.Id" method="post">
+            <button class="btn btn-primary">Добавить в корзину</button>
+        </form>
+    }
+    @if(User.Identity.IsAuthenticated)
+    {
+        @if (regions.Contains(ViewBag.UserRegion))
+        {
+            <form class="dkorzina" asp-controller="Order" asp-action="AddProduct" asp-route-id="@Model.Id" method="post">
+                <button class="btn btn-primary">Добавить в корзину</button>
+            </form>
+        }
 
-<form class="dkorzina" asp-controller="Basket" asp-action="AddProduct" asp-route-id="@Model.Id" method="post">
-    <button class="btn btn-primary">Добавить в корзину</button>
-</form>
+    }
+}

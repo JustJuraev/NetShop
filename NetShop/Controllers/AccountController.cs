@@ -15,15 +15,21 @@ namespace NetShop.Controllers
     {
         private IAccountService _accountService;
         private IUserRepository _userRepository;
-        public AccountController(IAccountService accountService, IUserRepository userRepository)
+        private IRegionRepository _regionRepository;
+        public AccountController(IAccountService accountService, IUserRepository userRepository, IRegionRepository regionRepository)
         {
             _accountService = accountService;
             _userRepository = userRepository;
+            _regionRepository = regionRepository;
         }
 
 
         [HttpGet]
-        public IActionResult Register() => View();
+        public IActionResult Register() 
+        { 
+            ViewBag.Regions = _regionRepository.GetAll();
+            return View();
+        } 
 
         [HttpPost]
         public IActionResult Register(RegisterViewModel model)

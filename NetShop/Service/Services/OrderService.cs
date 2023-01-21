@@ -14,6 +14,11 @@ namespace NetShop.Service.Services
             _orderRepository = orderRepository;
         }
 
+        public List<string> AddToOrderBasket(Order order)
+        {
+           return _orderRepository.AddToOrderBasket(order);
+        }
+
         public void Create(Order order)
         {
             _orderRepository.Create(order);
@@ -22,6 +27,11 @@ namespace NetShop.Service.Services
         public List<Order> GetAll()
         {
             return _orderRepository.GetAll();
+        }
+
+        public int TotalSum(Order order)
+        {
+            return _orderRepository.TotalSum(order);
         }
     }
 }

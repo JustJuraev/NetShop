@@ -1,0 +1,106 @@
+﻿@model Order
+@{
+   
+}
+<link rel="stylesheet" href="~/css/main.css" />
+@*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+*@
+@if(!User.Identity.IsAuthenticated)
+{
+    <h1>
+        Пожалуйста <a asp-controller="Account" asp-action="Login">Войдите в аккаунт</a> или <a asp-controller="Account" asp-action="Register">Зарегистрировайтесь</a>  что бы сделать заказ
+    </h1>
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <form method="post" asp-action="Index" asp-controller="Order">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Цена</th>
+                    <th scope="col">Количество</th>
+                    <th scope="col">#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.BasketProducts.Count; i++)
+                {
+                    <tr scope="row">
+                        <td><img class="catimg" src="https://localhost:5001/products/images/@Model.BasketProducts[i].Product.Image"></td>
+                        <td>@Model.BasketProducts[i].Product.Name</td>
+                        <td>@Model.BasketProducts[i].Product.Price Сум</td>
+                        <td>
+                            <div class="inputd">
+                                <input type="text" data-price="@Model.BasketProducts[i].Product.Price" class="form-control price-input" asp-for="@Model.BasketProducts[i].Count" value="@Model.BasketProducts[i].Count">
+                                <input type="hidden" asp-for="@Model.BasketProducts[i].Product.Id" value="@Model.BasketProducts[i].Product.Id">
+                                <input type="hidden" asp-for="@Model.BasketProducts[i].Product.Price" value="@Model.BasketProducts[i].Product.Price">
+                                <input type="hidden" asp-for="@Model.BasketProducts[i].Product.Count" value="@Model.BasketProducts[i].Product.Count">
+                            </div>
+                        </td>
+                        <td><button class="btn btn-primary" asp-controller="Order" asp-action="RemoveProduct" asp-route-id="@Model.BasketProducts[i].Product.Id" formmethod="post">Удалить</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <h1>Общая цена: <span id="total-price">@Model.TotalSum</span> Сум</h1>
+
+        @if (Model.BasketProducts.Count > 0)
+        {
+            <div class="form-group">
+                <label>Введите ваш номер телефона</label>
+                <input type="text" class="form-control" asp-for="Number">
+                <div class="invalid-feedback" style="display:block">
+                    <span asp-validation-for="Number"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Введите ваш адрес</label>
+                <input type="text" asp-for="Address" class="form-control">
+                <div class="invalid-feedback" style="display:block">
+                    <span asp-validation-for="Address"></span>
+                </div>
+
+            </div>
+            <div class="form-group">
+
+                <label>Введите номер вашей карты</label>
+
+                <input class="form-control" asp-for="CartNum">
+                <div class="invalid-feedback" style="display:block">
+                    <span asp-validation-for="CartNum"></span>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label>Выберите ваш город: </label>
+                <select asp-for="City" class="form-control">
+                    <option>Выберите опцию</option>
+                    <option>Ташкент</option>
+                    <option>Бухара</option>
+                    <option>Фергана</option>
+                    <option>Самарканд</option>
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label>Выберите тип доставки: </label>
+                <select asp-for="Delivery" class="form-control">
+                    <option>Выберите опцию</option>
+                    <option value="true">Доставка</option>
+                    <option value="false">Самовывоз</option>
+                </select>
+                <span asp-validation-for="Delivery"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Заказать</button>
+        }
+    </form>
+}
+<script src="~/js/order.js"></script>
+@section scripts{
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

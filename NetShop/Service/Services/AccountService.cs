@@ -20,6 +20,7 @@ namespace NetShop.Service.Services
             _userRepository = userRepository;
         }
 
+       
         public ClaimsIdentity Login(LoginViewModel model)
         {
             var user =  _userRepository.GetAll().FirstOrDefault(x => x.Name == model.Name);
@@ -45,6 +46,7 @@ namespace NetShop.Service.Services
                     Name = model.Name,
                     Role = Role.User,
                     Password = HashPasswordHelper.HashPassword(model.Password),
+                    RegionId = model.RegionId
                 };
             }
             _userRepository.Add(user);

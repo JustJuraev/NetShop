@@ -10,6 +10,8 @@ namespace NetShop.Models
 
         public string Name { get; set; }
 
+        public int RegionId { get; set; }
+
         public Role Role { get; set; }
     }
 }
