@@ -11,5 +11,7 @@ namespace NetShop.Service.Interfaces
         List<ProductProperty> ReturnCharac(int id);
 
         List<Filters> Filter(int id);
+
+        List<ProductProperty> JoinWithPropertyLanguage(int id, string language);
     }
 }

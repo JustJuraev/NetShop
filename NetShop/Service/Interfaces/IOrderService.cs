@@ -12,5 +12,7 @@ namespace NetShop.Service.Interfaces
         int TotalSum(Order order);
 
         List<string> AddToOrderBasket(Order order);
+
+        void Update(Order order);
     }
 }

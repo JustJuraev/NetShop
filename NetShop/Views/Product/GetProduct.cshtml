@@ -4,36 +4,46 @@
     ViewData["Title"] = $"{Model.Name}";
     var regions = ViewBag.Regions;
 }
-
+@inject LanguageService language
 <link rel="stylesheet" href="~/css/main.css" />
 
 <div class="maindiv">
     <img class="rasm" src="https://localhost:5001/products/images/@Model.Image">
    <div class="kik">
        <h2 class="ism">@Model.Name</h2>
-       <h3 class="narx">Цена: @Model.Price Сум</h3>
-       <h2 class="opisanie">Характеристики</h2>
+        <h3 class="narx">@language.GetKey("price"): @Model.PriceOutCome @language.GetKey("sum")</h3>
+        <h2 class="opisanie">@language.GetKey("charac")</h2>
        <div class="xarak">
             @foreach (var item in ViewBag.List)
             {
-                <p>@item.Property.Value --------- @item.Value</p>
+                @if(ViewBag.UZ == "uz")
+                {
+                    <p>@item.Value --------- @item.PPValue</p>
+                }
+                @if (ViewBag.DL == "ru")
+                {
+                    <p>@item.Property.Value --------- @item.Value</p>
+                }
             }
        </div>
-       
+       @if(Model.Count > 0)
+        {
+            <h5>@language.GetKey("stock"): @Model.Count</h5>
+        }
         @if(Model.Count <= 0)
         {
-            <h5>Нет в наличии</h5>
+            <h5>@language.GetKey("nostock")</h5>
         }
         @if (User.Identity.IsAuthenticated)
         {
             @if (!regions.Contains(ViewBag.UserRegion))
             {
-                <h2>Товар не доступен в вашем регионе </h2>
+                <h2>@language.GetKey("noregion")</h2>
             }
         }
     </div>
 </div>
-<h1 class="nameopis">Описание товара</h1>
+<h1 class="nameopis">@language.GetKey("desc")</h1>
 <h3 class="lopisanie">@Model.LongDesc</h3>
 @if (Model.Count > 0)
 {
@@ -41,7 +51,7 @@
     {
         
         <form class="dkorzina" asp-controller="Order" asp-action="AddProduct" asp-route-id="@Model.Id" method="post">
-            <button class="btn btn-primary">Добавить в корзину</button>
+            <button class="btn btn-primary">@language.GetKey("addbasket")</button>
         </form>
     }
     @if(User.Identity.IsAuthenticated)
@@ -49,7 +59,7 @@
         @if (regions.Contains(ViewBag.UserRegion))
         {
             <form class="dkorzina" asp-controller="Order" asp-action="AddProduct" asp-route-id="@Model.Id" method="post">
-                <button class="btn btn-primary">Добавить в корзину</button>
+                <button class="btn btn-primary">@language.GetKey("addbasket")</button>
             </form>
         }
 

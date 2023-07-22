@@ -21,7 +21,7 @@ namespace NetShop.Models
 
         public DateTime Date { get; set; }
 
-        public List<string> Basket { get; set; }
+        //public List<string> Basket { get; set; }
 
 
         [Required(ErrorMessage = "Номер карты не может быть пустым")]

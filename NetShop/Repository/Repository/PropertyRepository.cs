@@ -1,4 +1,5 @@
-﻿using NetShop.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using NetShop.Models;
 using NetShop.Repository.Interface;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace NetShop.Repository.Repository
         { 
             _context = context;
         }
+
+      
 
         public List<Property> GetAll() 
         {

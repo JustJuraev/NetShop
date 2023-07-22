@@ -18,5 +18,10 @@ namespace NetShop.Service.Services
         {
            return _categoryRepository.GetAll();
         }
+
+        public List<Category> JoinWithCategoryLanguage(string lang)
+        {
+            return _categoryRepository.JoinWithCategoryLanguage(lang);
+        }
     }
 }

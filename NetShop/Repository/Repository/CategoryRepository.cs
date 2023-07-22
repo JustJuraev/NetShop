@@ -14,6 +14,23 @@ namespace NetShop.Repository.Repository
             _context = context;
         }
 
+        public List<Category> JoinWithCategoryLanguage(string lang)
+        {
+            var categories = from c in _context.Categories
+                             join cl in _context.CategoryLanguages
+                             on c.Id equals cl.CategoryId
+                             where cl.Language == lang
+                             select new Category
+                             {
+                                 Id = c.Id,
+                                 Image = c.Image,
+                                 Name = cl.Name,
+                                 Products = c.Products
+                             };
+
+            return categories.ToList();
+        }
+
         public List<Category> GetAll()
         {
             return _context.Categories.ToList();

@@ -10,13 +10,17 @@ namespace NetShop.Service.Interfaces
 
 		List<Product> Search(string search);
 
-        Product GetProduct(int id);
+        Product GetProduct(int id, string lang);
 
 		List<Product> GetByCategory(int categoryId);
 		List<Product> Sort(string sort);
 
-		List<Product> Filter(int id, int pricemin, int pricemax, List<Filters> filters);
+		List<Product> Filter(int id, int pricemin, int pricemax, List<Filters> filters, string lang);
 
-		
+        List<Product> JoinWithProductLanguage(string lang);
+
+        Product GetProductById(int id);
+
+		List<Product> GetByCategoryId(int id, string lang);
     }
 }

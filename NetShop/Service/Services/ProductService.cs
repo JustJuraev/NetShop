@@ -14,9 +14,9 @@ namespace NetShop.Service.Services
 		   _productRepository = productRepository;
 		}
 
-        public List<Product> Filter(int id, int pricemin, int pricemax, List<Filters> filters)
+        public List<Product> Filter(int id, int pricemin, int pricemax, List<Filters> filters, string lang)
         {
-           return _productRepository.Filter(id,pricemin, pricemax, filters);
+           return _productRepository.Filter(id,pricemin, pricemax, filters, lang);
         }
 
         public List<Product> GetAll()
@@ -29,9 +29,24 @@ namespace NetShop.Service.Services
             return _productRepository.GetByCategory(categoryId);
         }
 
-        public Product GetProduct(int id)
+        public List<Product> GetByCategoryId(int id, string lang)
         {
-            return _productRepository.GetProduct(id);
+            return _productRepository.GetByCategoryId(id, lang);
+        }
+
+        public Product GetProduct(int id, string lang)
+        {
+            return _productRepository.GetProduct(id, lang);
+        }
+
+        public Product GetProductById(int id)
+        {
+            return _productRepository.GetProductById(id);
+        }
+
+        public List<Product> JoinWithProductLanguage(string lang)
+        {
+            return _productRepository.JoinWithProductLanguage(lang);
         }
 
         public List<Product> Search(string search)

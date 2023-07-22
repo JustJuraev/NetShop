@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject LanguageService language
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,23 +25,22 @@
                     <ul class="navbar-nav">
                         <li>
                             <div class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Корзина</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">@language.GetKey("basket")</a>
                             </div>
                         </li>
                         <li>
                             @if (!User.Identity.IsAuthenticated)
                             {
                                 <div class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Войти</a>
-
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">@language.GetKey("login")</a>
                                 </div>
                             }
                         </li>
                         <li>
                             @if(!User.Identity.IsAuthenticated)
                             {
-                                <div class="nav-item">                  
-                               <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Зарегистрироваться</a>
+                                <div class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">@language.GetKey("register")</a>
                                </div>
                             }
                         </li>
@@ -52,14 +52,30 @@
                              </div>
                           }
                         </li>
+                          <li>
+                           <div class="nav-item"> 
+                               <a asp-controller="Product" asp-action="ChangeLanguage" asp-route-culture="ru" class="nav-link text-dark" asp-area="">Рус</a>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="nav-item">
+                                <a asp-controller="Product" asp-action="ChangeLanguage" asp-route-culture="uz" class="nav-link text-dark" asp-area="">O'zbek</a>
+                            </div>
+                          </li>
+                        <li>
+                            <div class="nav-item">
+                                <a asp-controller="Product" asp-action="ChangeLanguage" asp-route-culture="en" class="nav-link text-dark" asp-area="">English</a>
+                            </div>
+                        </li>
                     </ul>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <form method="post" asp-controller="Account" asp-action="Logout">
                             <input class="btn btn-danger rounded" style="font-family:'Comic Sans MS'; font-weight: bold; font-size:20px;" type="submit" value="Выход" />
                         </form>
+                   
                     }
-                 
+                  
                 </div>
                 
             </div>

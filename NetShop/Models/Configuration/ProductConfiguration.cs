@@ -10,7 +10,7 @@ namespace NetShop.Models.Configuration
 			builder.ToTable("Products").HasKey(b => b.Id);
 			builder.HasIndex(b => b.Id).IsUnique();
 			builder.Property(b => b.Name).IsRequired();
-			builder.Property(b => b.Price).IsRequired();
+			builder.Property(b => b.PriceOutCome).IsRequired();
 			builder.Property(b => b.ShortDesc).IsRequired();
 			builder.Property(b => b.LongDesc).IsRequired();
 			builder.Property(b => b.Image).IsRequired();

@@ -3,6 +3,7 @@
     
     ViewBag.Title = "Регистрация";
 }
+@inject LanguageService language
 <div style="padding: 20px;"></div>
 <div class="container py-5">
     <div class="row">
@@ -12,22 +13,22 @@
                     <span class="anchor"></span>
                     <div class="card card-account card-outline-secondary border border-white">
                         <div class="card-header">
-                            <h3 class="mb-0 text-center paragraphHome text-black">Регистрация</h3>
+                            <h3 class="mb-0 text-center paragraphHome text-black">@language.GetKey("register")</h3>
                         </div>
                         <div class="card-body">
                             <form asp-controller="Account" asp-action="Register">
                                 <div asp-validation-summary="All" style="font-size:23px; font-family:Impact" class="text-danger text-center"></div>
                                 <div class="form-group">
-                                    <input asp-for="Name" class="form-control textbox-dg font-weight-bold text-center" placeholder="Имя" type="text">
+                                    <input asp-for="Name" class="form-control textbox-dg font-weight-bold text-center" placeholder="@language.GetKey("name")" type="text">
                                 </div>
                                 <div class="form-group">
-                                    <input autocomplete="new-password" asp-for="Password" placeholder="Пароль" class="form-control textbox-dg font-weight-bold text-center" type="password">
+                                    <input autocomplete="new-password" asp-for="Password" placeholder="@language.GetKey("parol")" class="form-control textbox-dg font-weight-bold text-center" type="password">
                                 </div>
                                 <div class="form-group">
-                                   <label>Выберите ваш город: </label>
+                                   <label>@language.GetKey("city")</label>
                                    <select asp-for="RegionId" class="form-control">
-                                   
-                                   <option selected>Выберите опцию</option>
+
+                                        <option selected>@language.GetKey("chose")</option>
                                    @foreach (var item in ViewBag.Regions)
                                    {
                                        <option value="@item.Id">@item.RegionName</option>
@@ -37,14 +38,14 @@
                                 </div>
                                 <span class="text-black" style="font-size: small; font-family:'Comic Sans MS'">Пароль должен быть длиной больше 6 символов и иметь только латинские символы</span>
                                 <div class="form-group">
-                                    <input autocomplete="new-password" asp-for="PasswordConfirm" placeholder="Подтвердите пароль" class="form-control textbox-dg font-weight-bold text-center" type="password">
+                                    <input autocomplete="new-password" asp-for="PasswordConfirm" placeholder="@language.GetKey("parolcon")" class="form-control textbox-dg font-weight-bold text-center" type="password">
                                 </div>
                                 <div>
-                                    <h2 class="paragraphHome text-center"><a asp-controller="Account" target="_blank" asp-action="Login" style="color:deepskyblue;">Вход</a></h2>
+                                    <h2 class="paragraphHome text-center"><a asp-controller="Account" target="_blank" asp-action="Login" style="color:deepskyblue;">@language.GetKey("login")</a></h2>
                                 </div>
 
                                 <h3 class="oshibka">@ViewBag.Error</h3>
-                                <button class="btn btn-success btn-lg float-right" type="submit">Зарегистрироваться</button>
+                                <button class="btn btn-success btn-lg float-right" type="submit">@language.GetKey("register")</button>
                             </form>
                         </div>
                     </div>

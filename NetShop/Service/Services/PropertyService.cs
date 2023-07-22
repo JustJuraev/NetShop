@@ -18,5 +18,7 @@ namespace NetShop.Service.Services
         {
             return _propertyRepository.GetAll();
         }
+
+      
     }
 }

@@ -65,7 +65,7 @@ namespace NetShop.Models
             {
                 for(int i = 0; i < item.Count; i++)
                 {
-                    sum += item.Product.Price;
+                    sum += item.Product.PriceOutCome;
                 }
             }
 

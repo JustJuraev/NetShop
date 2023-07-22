@@ -26,6 +26,37 @@ namespace NetShop.Repository.Repository
             return _context.ProductProperties.Include(p => p.Property).Where(p => p.ProductId == id).ToList(); 
         }
 
+        public List<ProductProperty> JoinWithPropertyLanguage(int id, string language)
+        {
+            var propertys = from py in _context.Properties
+                            join pyl in _context.PropertyLanguages
+                            on py.Id equals pyl.PropertyId
+                            where pyl.Language == language
+                            select new Property
+                            {
+                                Id = py.Id,
+                                Value = pyl.Value
+                            };
+
+            var Productpropertys = from pro in _context.ProductProperties
+                                   join py in propertys
+                                   on pro.PropertyId equals py.Id
+                                   select new ProductProperty
+                                   { 
+                                      Id= pro.Id,
+                                      Product = pro.Product,
+                                      ProductId = pro.ProductId,
+                                      Property = pro.Property,
+                                      PropertyId= pro.PropertyId,
+                                      PropertyLanguage =pro.PropertyLanguage,
+                                      Value = py.Value,
+                                      PPValue = pro.Value
+                                   };
+
+
+
+            return Productpropertys.Where(x => x.ProductId == id).ToList();
+        }
 
         public List<Filters> Filter(int id)
         {

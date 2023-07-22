@@ -33,5 +33,10 @@ namespace NetShop.Service.Services
         {
             return _orderRepository.TotalSum(order);
         }
+
+        public void Update(Order order)
+        {
+            _orderRepository.Update(order);
+        }
     }
 }

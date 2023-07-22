@@ -25,10 +25,32 @@ namespace NetShop.Models
 		public DbSet<User> Users { get; set; }
 
 		public DbSet<Region> Regions { get; set; }
+
+		public DbSet<Log> Logs { get; set; }
+
+		public DbSet<Cheque> Cheques { get; set; }
+
+		public DbSet<ChequeItem> ChequeItems { get; set; }
+
+		public DbSet<Stock> Stocks { get; set; }
+
+		public DbSet<ProductLanguage> ProductLanguages { get; set; }
+
+		public DbSet<CategoryLanguage> CategoryLanguages { get; set; }
+
+		public DbSet<PropertyLanguage> PropertyLanguages { get; set; }
+
+		public DbSet<OrderBasket> OrderItems { get; set; }
+
+		//TODO: Сделать миграцию
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 			base.OnModelCreating(modelBuilder);
+			modelBuilder.Entity<ProductLanguage>().HasKey(m => new { m.ProductId, m.Language });
+			modelBuilder.Entity<CategoryLanguage>().HasKey(m => new {m.CategoryId, m.Language});
+			modelBuilder.Entity<PropertyLanguage>().HasKey(m => new {m.PropertyId, m.Language});
 		}
 	}
 }

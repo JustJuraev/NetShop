@@ -25,6 +25,11 @@ namespace NetShop.Service.Services
             return _productProperty.GetAll();
         }
 
+        public List<ProductProperty> JoinWithPropertyLanguage(int id, string language)
+        {
+           return _productProperty.JoinWithPropertyLanguage(id, language);
+        }
+
         public List<ProductProperty> ReturnCharac(int id)
         {
             return _productProperty.ReturnCharac(id);

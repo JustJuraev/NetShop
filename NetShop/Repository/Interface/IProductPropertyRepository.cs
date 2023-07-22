@@ -9,5 +9,7 @@ namespace NetShop.Repository.Interface
         List<ProductProperty> ReturnCharac(int id);
 
         List<Filters> Filter(int id);
+
+        List<ProductProperty> JoinWithPropertyLanguage(int id, string language);
     }
 }

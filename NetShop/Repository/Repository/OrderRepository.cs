@@ -23,7 +23,7 @@ namespace NetShop.Repository.Repository
             {
                 for (int i = 0; i < item.Count; i++)
                 {
-                    sum += item.Product.Price;
+                    sum += item.Product.PriceOutCome;
                 }
             }
 
@@ -49,6 +49,12 @@ namespace NetShop.Repository.Repository
             order.Status = 20;
             _context.Orders.Add(order);
             _context.SaveChanges();
+        }
+
+        public void Update(Order order) 
+        { 
+             _context.Orders.Update(order);
+             _context.SaveChanges();
         }
 
         public List<Order> GetAll()

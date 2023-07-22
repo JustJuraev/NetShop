@@ -13,7 +13,7 @@ namespace NetShop.Models.Configuration
             builder.Property(b => b.Number).IsRequired();
             builder.Property(b => b.Delivery).IsRequired();
             builder.Property(b => b.Date).IsRequired();
-            builder.Property(b => b.Basket).IsRequired();
+           // builder.Property(b => b.Basket).IsRequired();
             builder.Property(b => b.CartNum).IsRequired();
             builder.Property(b => b.TotalSum).IsRequired();
             builder.Property(b => b.Status).IsRequired();

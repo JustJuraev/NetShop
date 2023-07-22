@@ -6,5 +6,7 @@ namespace NetShop.Service.Interfaces
     public interface ICategoryService 
     {
         List<Category> GetAll();
+
+        List<Category> JoinWithCategoryLanguage(string lang);
     }
 }

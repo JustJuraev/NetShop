@@ -17,5 +17,11 @@ namespace NetShop.Models
         public Property Property { get; set; }
 
         public string Value { get; set; }
+
+        [NotMapped]
+        public PropertyLanguage PropertyLanguage { get; set; }
+
+        [NotMapped]
+      public string PPValue { get; set; }
     }
 }

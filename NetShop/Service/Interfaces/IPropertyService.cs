@@ -6,5 +6,7 @@ namespace NetShop.Service.Interfaces
     public interface IPropertyService
     {
         List<Property> GetAll();
+
+        
     }
 }

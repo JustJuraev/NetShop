@@ -35,24 +35,24 @@ namespace NetShop.Controllers
         public IActionResult Register(RegisterViewModel model)
         {
             var user = _userRepository.GetAll().FirstOrDefault(x => x.Name == model.Name);
-            if (ModelState.IsValid)
-            {
+           
                 if (user != null)
                 {
                     ViewBag.Error = "Пользователь с таким логином уже есть";
+                    ViewBag.Regions = _regionRepository.GetAll();
+                    return View(model);
                 }
-                else
-                {
-                    var response = _accountService.Register(model);
+              
+                var response = _accountService.Register(model);
 
-                    HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                        new ClaimsPrincipal(response));
+                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(response));
 
 
-                    return RedirectToAction("Index", "Product");
-                }
-            }
-            return View(model);
+                return RedirectToAction("Index", "Product");
+                
+            
+          //  return View(model);
         }
 
         [HttpGet]
@@ -61,6 +61,13 @@ namespace NetShop.Controllers
         public IActionResult Login(LoginViewModel model)
         {
             var user = _userRepository.GetAll().FirstOrDefault(x => x.Name == model.Name);
+
+            if(user == null) 
+            {
+                ViewBag.Error = "Пользователь не найден";
+                return View(model);
+            }
+
             if (ModelState.IsValid)
             {
                 if (user.Password != HashPasswordHelper.HashPassword(model.Password))
