@@ -42,31 +42,32 @@ namespace NetShop.Controllers
 			return Redirect(Request.Headers["Referer"].ToString());
 		}
 
-		public IActionResult Index(string sort, string search)
+		public IActionResult Index(string sort, string search, string testDefaultLanguage = "ru")
 		{
-			var list = new List<Product>();
+            var list = new List<Product>();
 
-            if (CultureInfo.CurrentCulture.Name != defaultLanguage)
-			{
-            	list = _productService.JoinWithProductLanguage(CultureInfo.CurrentCulture.Name);
+            if (CultureInfo.CurrentCulture.Name != testDefaultLanguage)
+            {
+                list = _productService.JoinWithProductLanguage(CultureInfo.CurrentCulture.Name);
                 ViewBag.Categories = _categoryService.JoinWithCategoryLanguage(CultureInfo.CurrentCulture.Name);
             }
-			else
-			{
+            else
+            {
+                list = _productService.JoinWithProductLanguage(testDefaultLanguage); 
                 list = _productService.Sort(sort);
                 list = _productService.Search(search);
                 ViewBag.Categories = _categoryService.GetAll();
             }
-		
-			return View(list);
-		}
+
+            return View(list);
+        }
 
 		public IActionResult Privacy()
 		{
 			return View();
 		}
 
-		public IActionResult GetByCategory(int id, int pricemin, int pricemax, List<Filters> filters)
+		public IActionResult GetByCategory(int id, int pricemin, int pricemax, List<Filters> filters, string testCurrentName = "ru")
 		{
 			ProductFilterModel productFilter = new ProductFilterModel();
 			if(CultureInfo.CurrentCulture.Name != defaultLanguage) 
@@ -79,7 +80,7 @@ namespace NetShop.Controllers
 
 
            
-            productFilter.Products = _productService.Filter(id, pricemin, pricemax, filters, CultureInfo.CurrentCulture.Name);
+            productFilter.Products = _productService.Filter(id, pricemin, pricemax, filters, testCurrentName);
            
             return View(productFilter);
 		}
@@ -87,16 +88,16 @@ namespace NetShop.Controllers
 		public IActionResult GetProduct(int id)
 		{
 		
-			if (User.Identity.IsAuthenticated)
-			{
-				ViewBag.UserRegion = _userRepository.ReturnByName(User.Identity.Name).RegionId;
-				ViewBag.Regions = _productAddress.ReturnProductRegions(id);
-			}
+			//if (User.Identity.IsAuthenticated)
+			//{
+			//	ViewBag.UserRegion = _userRepository.ReturnByName(User.Identity.Name).RegionId;
+			//	ViewBag.Regions = _productAddress.ReturnProductRegions(id);
+			//}
 			var product = new Product();
 
             if (CultureInfo.CurrentCulture.Name != defaultLanguage)
             {
-                product = _productService.GetProduct(id, CultureInfo.CurrentCulture.Name);
+                product = _productService.GetProduct(id, "uz");
 				ViewBag.UZ = "uz";
 				ViewBag.List = _productPropertyService.JoinWithPropertyLanguage(id, CultureInfo.CurrentCulture.Name);
             }
